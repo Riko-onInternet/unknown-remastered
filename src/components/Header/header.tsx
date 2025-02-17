@@ -16,6 +16,7 @@ import { House, Archive, Search } from "lucide-react";
 const links = [
   { name: "Home", href: "/", icon: House },
   { name: "Archivio", href: "/archive", icon: Archive },
+  { name: "Cerca", href: "/search", icon: Search },
 ];
 
 const classMenuBottom =
@@ -62,12 +63,7 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
-            <button className="flex items-center gap-2 p-3 header-link">
-              <Search size="20" />
-              <span className="leading-none">Cerca</span>
-            </button>
-
+          <div className="hidden md:block">
             <User />
           </div>
         </div>
@@ -89,10 +85,6 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
-              <button className={classMenuBottom}>
-                <Search size="20" />
-                <span className="leading-none">Cerca</span>
-              </button>
               <div className="w-[50px] h-[45px] flex flex-col justify-center items-center">
                 <User />
               </div>
