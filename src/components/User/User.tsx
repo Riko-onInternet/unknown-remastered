@@ -1,16 +1,16 @@
 import { Avatar } from "@heroui/react";
 
-function isChromeDesktop() {
+/* function isChromeDesktop() {
   return (
     /Chrome/.test(navigator.userAgent) &&
     /Google Inc/.test(navigator.vendor) &&
     !/Mobile/.test(navigator.userAgent)
   );
-}
+} */
 
 export default function User() {
   // Funzione per mettere il padding a destra all'header
-  function PaddingOpen() {
+  /* function PaddingOpen() {
     if (!isChromeDesktop()) {
       console.warn("Funzione disponibile solo per Chrome desktop e derivati");
       return;
@@ -23,10 +23,10 @@ export default function User() {
     } else {
       console.warn("Elemento 'header' non trovato");
     }
-  }
+  } */
 
   // Funzione per rimuovere il padding a destra all'header
-  function PaddingClose() {
+  /* function PaddingClose() {
     if (!isChromeDesktop()) {
       console.warn("Funzione disponibile solo per Chrome desktop e derivati");
       return;
@@ -39,7 +39,7 @@ export default function User() {
     } else {
       console.warn("Elemento 'header' non trovato");
     }
-  }
+  } */
 
   return (
     <Avatar
