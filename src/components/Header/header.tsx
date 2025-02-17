@@ -1,6 +1,7 @@
 "use client";
 
 import "./style.css";
+import { usePathname } from "next/navigation";
 
 // NextJS
 import Image from "next/image";
@@ -18,9 +19,15 @@ const links = [
 ];
 
 const classMenuBottom =
-  "flex flex-col items-center justify-center gap-1 min-w-[50px] h-[45px]";
+  "flex flex-col items-center justify-center gap-1 min-w-[50px] h-[40px]";
 
 export default function Header() {
+  const pathname = usePathname();
+
+  const isActiveLink = (href: string) => {
+    return pathname === href ? "active-link" : "";
+  };
+
   return (
     <>
       {/* Header */}
@@ -42,7 +49,9 @@ export default function Header() {
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="flex items-center gap-2 p-3 header-link"
+                      className={`flex items-center gap-2 p-3 header-link ${isActiveLink(
+                        link.href
+                      )}`}
                     >
                       <link.icon size="18" className="mb-[2px]" />
                       <span>{link.name}</span>
@@ -71,7 +80,10 @@ export default function Header() {
             <ul className="flex items-center justify-between gap-4 w-full">
               {links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className={classMenuBottom}>
+                  <Link
+                    href={link.href}
+                    className={`${classMenuBottom} ${isActiveLink(link.href)}`}
+                  >
                     <link.icon size="20" />
                     <span className="leading-none">{link.name}</span>
                   </Link>
