@@ -1,0 +1,41 @@
+body {
+  margin-top: 66px;
+
+  @media (min-width: 768px) {
+    margin-top: 84px;
+  }
+}
+
+.header {
+  background-color: rgba(var(--unknown-background-secondary), 0.3) !important;
+  @apply fixed top-0 left-0 w-full backdrop-blur;
+}
+
+.navbar {
+  background-color: rgba(var(--unknown-background-secondary), 0.3) !important;
+  max-width: 300px;
+  width: 100%;
+  @apply fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full overflow-hidden outline-1 outline outline-offset-0 outline-zinc-500/50 md:hidden;
+}
+
+.navbar-container {
+  @apply flex flex-col items-center justify-center backdrop-blur py-4 px-4 text-sm;
+}
+
+.header-link,
+.header-link span,
+.header-link svg {
+  transition: all ease 0.3s;
+}
+
+.header-link {
+  & span {
+    border-bottom: 2px solid transparent;
+  }
+  &:hover span {
+    border-color: rgb(var(--unknown-primary));
+  }
+  &:hover svg {
+    color: rgb(var(--unknown-primary));
+  }
+}

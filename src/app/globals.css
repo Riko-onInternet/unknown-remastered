@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primario */
+  --unknown-primary: 46, 139, 87;
+  --unknown-primary-hover: 37, 112, 70;
+
+  /* Secondario */
+  --unknown-background: 26, 26, 26;
+  --unknown-background-secondary: 36, 36, 36;
+  --unknown-background-tertiary: 17, 17, 17;
+
+  /* Testo */
+  --unknown-text: 255, 255, 255;
+
+  /* Stato */
+  --unknown-error: 243, 18, 48;
+  --unknown-error-hover: 179, 14, 36;
+
+  /* Altro */
+  --unknown-imdb: 245, 197, 24;
+}
+
+*:focus-visible {
+  outline: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: rgba(var(--unknown-background), 1) !important;
+  color: rgb(var(--unknown-text)) !important;
+}
+
+img {
+  user-select: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
