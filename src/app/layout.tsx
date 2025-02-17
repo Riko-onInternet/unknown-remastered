@@ -3,7 +3,6 @@ import "./globals.css";
 
 // ----- Providers -----
 import { HeroUI } from "@/providers/HeroUI";
-import { Provider } from "@/components/ui/provider";
 
 export const metadata: Metadata = {
   title: "unKnown",
