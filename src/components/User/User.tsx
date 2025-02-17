@@ -66,7 +66,7 @@ export default function User() {
         isOpen={isOpen}
         onOpenChange={isOpen ? PaddingClose : PaddingOpen}
       >
-        <DrawerContent className="bg-[rgb(var(--unknown-background-secondary))] outline outline-zinc-500/50 rounded-none">
+        <DrawerContent className="bg-[rgb(var(--unknown-background-secondary))] outline-1 outline-offset-0 outline-zinc-500/50 rounded-none">
           <DrawerHeader className="flex flex-col gap-1">
             Drawer Title
           </DrawerHeader>
