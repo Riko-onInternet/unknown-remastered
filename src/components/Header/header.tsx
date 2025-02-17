@@ -44,7 +44,7 @@ export default function Header() {
             </Link>
 
             {/* Menu */}
-            <div className="hidden md:block">
+            <div className="hidden md:block ">
               <ul className="flex items-center justify-center gap-0">
                 {links.map((link, index) => (
                   <li key={index}>
@@ -63,7 +63,7 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center">
             <User />
           </div>
         </div>

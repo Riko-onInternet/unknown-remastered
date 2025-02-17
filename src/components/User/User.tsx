@@ -18,21 +18,18 @@ function isChromeDesktop() {
 }
 
 export default function User() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // Funzione per mettere il padding a destra all'header
   function PaddingOpen() {
-    if (!isChromeDesktop()) {
-      console.warn("Funzione disponibile solo per Chrome desktop e derivati");
-      return;
-    }
+    if (isChromeDesktop()) {
+      const header = document.querySelector("header");
 
-    const header = document.querySelector("header");
-
-    if (header) {
-      header.classList.add("pr-[17px]");
-    } else {
-      console.warn("Elemento 'header' non trovato");
+      if (header) {
+        header.classList.add("pr-[17px]");
+      } else {
+        console.warn("Elemento 'header' non trovato");
+      }
     }
 
     onOpen();
@@ -40,20 +37,17 @@ export default function User() {
 
   // Funzione per rimuovere il padding a destra all'header
   function PaddingClose() {
-    if (!isChromeDesktop()) {
-      console.warn("Funzione disponibile solo per Chrome desktop e derivati");
-      return;
+    if (isChromeDesktop()) {
+      const header = document.querySelector("header");
+
+      if (header) {
+        header.classList.remove("pr-[17px]");
+      } else {
+        console.warn("Elemento 'header' non trovato");
+      }
     }
 
-    const header = document.querySelector("header");
-
-    if (header) {
-      header.classList.remove("pr-[17px]");
-    } else {
-      console.warn("Elemento 'header' non trovato");
-    }
-
-    onOpenChange();
+    onClose();
   }
 
   return (
@@ -66,8 +60,13 @@ export default function User() {
           size="sm"
         />
       </button>
-      <Drawer isOpen={isOpen} onOpenChange={PaddingClose}>
-        <DrawerContent>
+      <Drawer
+        size="xs"
+        backdrop="blur"
+        isOpen={isOpen}
+        onOpenChange={isOpen ? PaddingClose : PaddingOpen}
+      >
+        <DrawerContent className="bg-[rgb(var(--unknown-background-secondary))] outline outline-zinc-500/50 rounded-none">
           <DrawerHeader className="flex flex-col gap-1">
             Drawer Title
           </DrawerHeader>
