@@ -22,6 +22,9 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
+
+  // Button
+  Button,
 } from "@heroui/react";
 
 // NextJS
@@ -170,7 +173,10 @@ export default function User() {
             <Divider className="my-2" />
 
             {/* Tasti iscrizione e registrazione */}
-            <div></div>
+            <div className="flex items-center gap-2 w-full">
+              <Button className="w-full border-[rgb(var(--unknown-primary))] text-[rgb(var(--unknown-primary))] button_login" variant="ghost">Login</Button>
+              <Button className="w-full bg-[rgb(var(--unknown-primary))]">Registrati</Button>
+            </div>
 
             <Divider className="my-2" />
 

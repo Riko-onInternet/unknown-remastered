@@ -13,3 +13,8 @@
   background: rgb(var(--unknown-primary));
   border-radius: 4px;
 }
+
+.button_login.data-\[hover\=true\]\:\!bg-default[data-hover="true"] {
+  --tw-bg-opacity: 0 !important;
+  background-color: rgba(var(--unknown-primary), 0.1) !important;
+}
