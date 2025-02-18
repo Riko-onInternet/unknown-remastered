@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.outline-primary {
+  outline-color: rgb(var(--unknown-primary)) !important;
+}
+
 :root {
   /* Primario */
   --unknown-primary: 46, 139, 87;
@@ -34,6 +38,10 @@ html {
 }
 
 img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
   user-select: none;
 }
 

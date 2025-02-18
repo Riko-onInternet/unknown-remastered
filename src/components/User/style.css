@@ -1,0 +1,15 @@
+/* Stili per la scrollbar in Chrome/Safari/Edge */
+.scroll-unknown::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scroll-unknown::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.scroll-unknown::-webkit-scrollbar-thumb {
+  background: rgb(var(--unknown-primary));
+  border-radius: 4px;
+}
