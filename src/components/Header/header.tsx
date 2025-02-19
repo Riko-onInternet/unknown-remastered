@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Components
-import User from "../User/User";
+import UserComponent from "../User/User";
 
 // icons
 import { House, Archive, Search } from "lucide-react";
@@ -20,7 +20,7 @@ const links = [
 ];
 
 const classMenuBottom =
-  "flex flex-col items-center justify-center gap-1 min-w-[50px] h-[40px]";
+  "flex flex-col items-center justify-center gap-1 min-w-[50px] h-[50px]";
 
 export default function Header() {
   const pathname = usePathname();
@@ -33,14 +33,14 @@ export default function Header() {
     <>
       {/* Header */}
       <header className="header">
-        <div className="w-full flex items-center justify-center md:justify-between px-20 py-4">
+        <div className="w-full flex items-center justify-center md:justify-between px-20 h-[66px] md:h-[83px]">
           {/* Logo */}
           <div className="flex items-center gap-4">
             <Link
               href="/"
-              className="w-[60px] md:w-[90px] relative aspect-[128/73]"
+              className="w-[70px] md:w-[90px] relative aspect-[128/73] rounded-md"
             >
-              <Image src="/img/logo.png" alt="Logo" fill />
+              <Image src="/img/logo.png" className="p-1" alt="Logo" fill />
             </Link>
 
             {/* Menu */}
@@ -50,7 +50,7 @@ export default function Header() {
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className={`flex items-center gap-2 p-3 header-link ${isActiveLink(
+                      className={`flex items-center gap-2 p-3 header-link outline-transparent rounded-lg ${isActiveLink(
                         link.href
                       )}`}
                     >
@@ -64,7 +64,7 @@ export default function Header() {
           </div>
 
           <div className="hidden md:flex items-center">
-            <User />
+            <UserComponent />
           </div>
         </div>
       </header>
@@ -72,7 +72,7 @@ export default function Header() {
       {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-container">
-          <div className="flex items-center gap-4 w-full">
+          <div className="flex items-center gap-4">
             <ul className="flex items-center justify-between gap-4 w-full">
               {links.map((link) => (
                 <li key={link.href}>
@@ -86,7 +86,7 @@ export default function Header() {
                 </li>
               ))}
               <div className="w-[50px] h-[45px] flex flex-col justify-center items-center">
-                <User />
+                <UserComponent />
               </div>
             </ul>
           </div>

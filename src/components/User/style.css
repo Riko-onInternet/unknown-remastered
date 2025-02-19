@@ -18,3 +18,44 @@
   --tw-bg-opacity: 0 !important;
   background-color: rgba(var(--unknown-primary), 0.1) !important;
 }
+
+.menu_link,
+.menu_link svg {
+  transition: all 0.2s ease;
+  color: var(--unknown-text);
+}
+
+.menu_link {
+  background-color: transparent;
+  outline: 1px solid transparent;
+  outline-offset: 0;
+}
+
+/* Applica hover solo su dispositivi che lo supportano */
+@media (hover: hover) {
+  .menu_link:hover {
+    background-color: rgba(var(--unknown-primary), 0.2);
+  }
+
+  .menu_link:hover svg {
+    color: rgb(var(--unknown-primary));
+  }
+}
+
+/* Rimuovi l'effetto focus tranne quando si usa la tastiera */
+.menu_link:focus:not(:focus-visible) {
+  background-color: transparent;
+}
+
+.menu_link:focus:not(:focus-visible) svg {
+  color: var(--unknown-text);
+}
+
+/* Mantieni focus-visible per l'accessibilità da tastiera */
+.menu_link:focus-visible {
+  background-color: rgba(var(--unknown-primary), 0.2);
+}
+
+.menu_link:focus-visible svg {
+  color: rgb(var(--unknown-primary));
+}

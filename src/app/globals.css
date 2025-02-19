@@ -6,6 +6,16 @@
   outline-color: rgb(var(--unknown-primary)) !important;
 }
 
+.text-danger {
+  --tw-text-opacity: 1 !important;
+  color: rgba(var(--unknown-error), var(--tw-text-opacity)) !important;
+}
+
+.data-\[hover\=true\]\:\!bg-danger[data-hover="true"] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(var(--unknown-error), var(--tw-bg-opacity)) !important;
+}
+
 :root {
   /* Primario */
   --unknown-primary: 46, 139, 87;
@@ -28,7 +38,7 @@
 }
 
 *:focus-visible {
-  outline: none !important;
+  outline: 1px solid rgb(var(--unknown-primary-hover)) !important;
 }
 
 html {

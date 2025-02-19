@@ -1,4 +1,5 @@
 import "./style.css";
+
 import { useState } from "react";
 
 // ----- HeroUI
@@ -31,6 +32,30 @@ import {
 import Image from "next/image";
 import profilePics from "@/db/db_pic_profile.json";
 
+// Icons
+import { User, CheckCheck, CircleHelp, Settings2 } from "lucide-react";
+
+const menu_account = [
+  {
+    name: "Profilo",
+    icon: User,
+    href: "/account",
+  },
+  {
+    name: "Lista",
+    icon: CheckCheck,
+    href: "/list",
+  },
+  {
+    name: "F.A.Q",
+    icon: CircleHelp,
+    href: "/faq",
+  },
+];
+
+const menu_class =
+  "w-full inline-flex gap-2 justify-start items-center min-h-10 text-sm px-2 rounded-md menu_link";
+
 // Funzione per vedere se il sito viene caricato su Chrome Desktop
 function isChromeDesktop() {
   return (
@@ -40,7 +65,7 @@ function isChromeDesktop() {
   );
 }
 
-export default function User() {
+export default function UserComponent() {
   const {
     isOpen: isOpenProfile,
     onOpen: onOpenProfile,
@@ -51,6 +76,12 @@ export default function User() {
     onOpen: onOpenPicProfile,
     onOpenChange: onOpenChangePicProfile,
   } = useDisclosure();
+  const {
+    isOpen: isOpenOptions,
+    onOpen: onOpenOptions,
+    onOpenChange: onOpenChangeOptions,
+  } = useDisclosure();
+
   const [selectedAvatar, setSelectedAvatar] = useState(
     "/img/profile/default.png"
   );
@@ -93,7 +124,10 @@ export default function User() {
 
   return (
     <>
-      <button onClick={PaddingOpen} className="flex items-center gap-3">
+      <button
+        onClick={PaddingOpen}
+        className="flex items-center gap-3 p-2 rounded-full md:rounded-md"
+      >
         <Avatar
           name="Utente"
           isBordered
@@ -110,13 +144,22 @@ export default function User() {
         onOpenChange={isOpenProfile ? PaddingClose : PaddingOpen}
       >
         <DrawerContent className="bg-[rgb(var(--unknown-background-secondary))] outline-1 outline-offset-0 outline-zinc-500/50 rounded-none">
-          <DrawerBody className="pt-10">
+          <DrawerBody className="pt-4">
             {/* Cambio immagine */}
             <>
-              <button onClick={onOpenPicProfile} title="Cambia l'avatar">
+              <button
+                onClick={onOpenPicProfile}
+                title="Cambia l'avatar"
+                className="pt-4 pb-1 px-4 rounded-xl w-max mx-auto"
+              >
                 <div className="flex flex-col items-center justify-center gap-2">
                   <div className="relative size-20">
-                    <Image fill src={selectedAvatar} alt="img_pic" className="rounded-full outline-2 outline outline-primary outline-offset-2" />
+                    <Image
+                      fill
+                      src={selectedAvatar}
+                      alt="img_pic"
+                      className="rounded-full outline-4 outline outline-primary outline-offset-2"
+                    />
                   </div>
                   <p>Benvenuto utente!</p>
                 </div>
@@ -147,15 +190,15 @@ export default function User() {
                                 className="p-2 rounded-lg flex flex-col items-center justify-center gap-2"
                               >
                                 <div className="relative size-24 mx-auto">
-                                  <Image 
-                                    fill 
-                                    src={pic.src} 
-                                    alt={pic.name} 
+                                  <Image
+                                    fill
+                                    src={pic.src}
+                                    alt={pic.name}
                                     className={`rounded-full transition-all duration-200 ${
-                                      selectedAvatar === pic.src 
-                                        ? "outline-2 outline outline-primary outline-offset-2" 
+                                      selectedAvatar === pic.src
+                                        ? "outline-4 outline outline-primary outline-offset-2"
                                         : ""
-                                    }`} 
+                                    }`}
                                   />
                                 </div>
                                 <p className="text-sm">{pic.name}</p>
@@ -174,14 +217,52 @@ export default function User() {
 
             {/* Tasti iscrizione e registrazione */}
             <div className="flex items-center gap-2 w-full">
-              <Button className="w-full border-[rgb(var(--unknown-primary))] text-[rgb(var(--unknown-primary))] button_login" variant="ghost">Login</Button>
-              <Button className="w-full bg-[rgb(var(--unknown-primary))]">Registrati</Button>
+              <Button
+                className="w-full border-[rgb(var(--unknown-primary))] text-[rgb(var(--unknown-primary))] button_login"
+                variant="ghost"
+                radius="full"
+              >
+                Login
+              </Button>
+              <Button
+                className="w-full bg-[rgb(var(--unknown-primary))] rounded-full"
+                radius="full"
+              >
+                Registrati
+              </Button>
             </div>
 
             <Divider className="my-2" />
 
             {/* Menu utente */}
-            <div></div>
+            <div className="w-full flex flex-col items-center">
+              <ul className="w-full flex flex-col items-center">
+                {menu_account.map((menu, index) => (
+                  <li key={index} className="w-full">
+                    <a href={menu.href} className={menu_class}>
+                      <menu.icon />
+                      <span>{menu.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <button className={menu_class} onClick={onOpenOptions}>
+                <Settings2 />
+                <span>Impostazioni</span>
+              </button>
+              <Modal
+                isOpen={isOpenOptions}
+                onOpenChange={onOpenChangeOptions}
+                backdrop="blur"
+                placement="top-center"
+                size="xl"
+              >
+                <ModalContent>
+                  <ModalHeader>Impostazioni</ModalHeader>
+                  <ModalBody></ModalBody>
+                </ModalContent>
+              </Modal>
+            </div>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

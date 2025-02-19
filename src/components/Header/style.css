@@ -20,7 +20,7 @@ body {
 }
 
 .navbar-container {
-  @apply flex flex-col items-center justify-center backdrop-blur py-4 px-4 text-sm;
+  @apply flex flex-col items-center justify-center backdrop-blur py-2 px-2 text-sm;
 }
 
 .header-link,
