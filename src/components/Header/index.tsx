@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Components
-import UserComponent from "../User/User";
+import UserComponent from "@/components/User";
 
 // icons
 import { House, Archive, Search } from "lucide-react";
