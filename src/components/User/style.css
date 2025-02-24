@@ -40,6 +40,14 @@
   .menu_link:hover svg {
     color: rgb(var(--unknown-primary));
   }
+
+  button.menu_link:hover {
+    background-color: rgba(var(--unknown-primary), 0.2) !important;
+  }
+
+  button.menu_link:hover svg {
+    color: rgb(var(--unknown-primary)) !important;
+  }
 }
 
 /* Rimuovi l'effetto focus tranne quando si usa la tastiera */
@@ -58,4 +66,30 @@
 
 .menu_link:focus-visible svg {
   color: rgb(var(--unknown-primary));
+}
+
+/* Regola specifica per il bottone delle impostazioni */
+button.menu_link {
+  background-color: transparent !important;
+}
+
+#audio_primario,
+#audio_secondario {
+  @apply bg-neutral-700/40;
+}
+
+.bg-content1 {
+  background-color: rgb(var(--unknown-background-secondary));
+}
+
+.group[data-selected="true"] .group-data-\[selected\=true\]\:bg-primary {
+  background-color: rgb(var(--unknown-primary));
+}
+
+.group .bg-default-200 {
+  background-color: rgb(var(--unknown-background));
+}
+
+.group[data-focus-visible="true"] .group-data-\[focus-visible\=true\]\:ring-focus {
+  --tw-ring-color: rgb(var(--unknown-primary));
 }

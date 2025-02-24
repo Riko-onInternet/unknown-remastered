@@ -10,5 +10,13 @@ export default {
   ],
   theme: {},
   darkMode: "class",
-  plugins: [heroui()],
+  plugins: [
+    heroui({
+      themes: {
+        dark: {
+          colors: { danger: "#f31230" },
+        },
+      },
+    }),
+  ],
 } satisfies Config;
