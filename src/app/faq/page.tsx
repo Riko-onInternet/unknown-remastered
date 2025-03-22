@@ -4,7 +4,9 @@ export default function PageFAQ() {
   return (
     <>
       <Header />
-      <h1>pagina faq</h1>
+      <div className="h-96 w-full bg-blue-200">
+
+      </div>
     </>
   )
 }
