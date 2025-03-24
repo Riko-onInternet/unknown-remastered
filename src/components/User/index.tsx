@@ -157,13 +157,35 @@ export default function UserComponent() {
 
   const [openTooltip, setOpenTooltip] = useState(false);
 
+  // Funzione per calcolare la larghezza della scrollbar
+  function getScrollbarWidth() {
+    // Crea un div con scrollbar
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll';
+    document.body.appendChild(outer);
+    
+    // Crea un div interno
+    const inner = document.createElement('div');
+    outer.appendChild(inner);
+    
+    // Calcola la differenza di larghezza
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+    
+    // Rimuovi i div creati
+    outer.parentNode?.removeChild(outer);
+    
+    return scrollbarWidth;
+  }
+
   // Funzione per mettere il padding a destra all'header
   function PaddingOpen() {
     if (isChromeDesktop()) {
       const header = document.querySelector("header");
 
       if (header) {
-        header.classList.add("pr-[17px]");
+        const scrollbarWidth = getScrollbarWidth();
+        header.style.paddingRight = `${scrollbarWidth}px`;
       } else {
         console.warn("Elemento 'header' non trovato");
       }
@@ -178,7 +200,7 @@ export default function UserComponent() {
       const header = document.querySelector("header");
 
       if (header) {
-        header.classList.remove("pr-[17px]");
+        header.style.paddingRight = '0px';
       } else {
         console.warn("Elemento 'header' non trovato");
       }
@@ -280,6 +302,9 @@ export default function UserComponent() {
                       ))}
                     </div>
                   </ModalBody>
+                  <ModalFooter>
+                    
+                  </ModalFooter>
                 </ModalContent>
               </Modal>
             </>
