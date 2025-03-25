@@ -14,10 +14,10 @@
   border-radius: 4px;
 }
 
-.button_login.data-\[hover\=true\]\:\!bg-default[data-hover="true"] {
+/* .button_login.data-\[hover\=true\]\:\!bg-default[data-hover="true"] {
   --tw-bg-opacity: 0 !important;
   background-color: rgba(var(--unknown-primary), 0.1) !important;
-}
+} */
 
 .menu_link,
 .menu_link svg {
@@ -74,7 +74,9 @@ button.menu_link {
 }
 
 #audio_primario,
-#audio_secondario {
+#audio_secondario,
+#sottotitoli_primario,
+#sottotitoli_secondario {
   @apply bg-neutral-700/40;
 }
 

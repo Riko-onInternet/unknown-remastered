@@ -26,7 +26,7 @@ import {
   ModalFooter,
 
   // Button
-  Button,
+  // Button,
 
   // Select
   Select,
@@ -74,7 +74,7 @@ const menu_account = [
 const menu_class =
   "w-full inline-flex gap-2 justify-start items-center min-h-10 text-sm px-2 rounded-md menu_link";
 
-const account_class_container = "p-4 bg-neutral-700/40 rounded-md";
+const account_class_container = "p-4 bg-neutral-700/40 rounded-xl";
 const account_class_content = "w-full flex items-center justify-between";
 
 const linguage = [
@@ -154,27 +154,29 @@ export default function UserComponent() {
   const [selectedAvatar, setSelectedAvatar] = useState(
     "/img/profile/default.png"
   );
+  // Stato temporaneo per tenere traccia dell'avatar selezionato prima della conferma
+  const [tempSelectedAvatar, setTempSelectedAvatar] = useState("");
 
   const [openTooltip, setOpenTooltip] = useState(false);
 
   // Funzione per calcolare la larghezza della scrollbar
   function getScrollbarWidth() {
     // Crea un div con scrollbar
-    const outer = document.createElement('div');
-    outer.style.visibility = 'hidden';
-    outer.style.overflow = 'scroll';
+    const outer = document.createElement("div");
+    outer.style.visibility = "hidden";
+    outer.style.overflow = "scroll";
     document.body.appendChild(outer);
-    
+
     // Crea un div interno
-    const inner = document.createElement('div');
+    const inner = document.createElement("div");
     outer.appendChild(inner);
-    
+
     // Calcola la differenza di larghezza
     const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
-    
+
     // Rimuovi i div creati
     outer.parentNode?.removeChild(outer);
-    
+
     return scrollbarWidth;
   }
 
@@ -200,7 +202,7 @@ export default function UserComponent() {
       const header = document.querySelector("header");
 
       if (header) {
-        header.style.paddingRight = '0px';
+        header.style.paddingRight = "0px";
       } else {
         console.warn("Elemento 'header' non trovato");
       }
@@ -209,10 +211,29 @@ export default function UserComponent() {
     onCloseProfile();
   }
 
-  // Funzione per gestire la selezione dell'avatar
-  const handleAvatarSelect = (src: string) => {
-    setSelectedAvatar(src);
+  // Funzione per gestire la selezione temporanea dell'avatar
+  const handleTempAvatarSelect = (src: string) => {
+    setTempSelectedAvatar(src);
+  };
+
+  // Funzione per confermare la selezione dell'avatar
+  const confirmAvatarSelection = () => {
+    if (tempSelectedAvatar) {
+      setSelectedAvatar(tempSelectedAvatar);
+    }
     onOpenChangePicProfile();
+  };
+
+  // Funzione per annullare la selezione dell'avatar
+  const cancelAvatarSelection = () => {
+    setTempSelectedAvatar("");
+    onOpenChangePicProfile();
+  };
+
+  // Funzione per inizializzare il temp avatar quando si apre il modal
+  const handleOpenPicProfile = () => {
+    setTempSelectedAvatar(selectedAvatar);
+    onOpenPicProfile();
   };
 
   return (
@@ -241,7 +262,7 @@ export default function UserComponent() {
             {/* Cambio immagine */}
             <>
               <button
-                onClick={onOpenPicProfile}
+                onClick={handleOpenPicProfile}
                 title="Cambia l'avatar"
                 className="pt-4 pb-1 px-4 rounded-xl w-max mx-auto"
               >
@@ -279,7 +300,7 @@ export default function UserComponent() {
                             {category.data.map((pic) => (
                               <button
                                 key={pic.name}
-                                onClick={() => handleAvatarSelect(pic.src)}
+                                onClick={() => handleTempAvatarSelect(pic.src)}
                                 className="p-2 rounded-lg flex flex-col items-center justify-center gap-2"
                               >
                                 <div className="relative size-24 mx-auto">
@@ -288,7 +309,7 @@ export default function UserComponent() {
                                     src={pic.src}
                                     alt={pic.name}
                                     className={`rounded-full transition-all duration-200 ${
-                                      selectedAvatar === pic.src
+                                      tempSelectedAvatar === pic.src
                                         ? "outline-4 outline outline-primary outline-offset-2"
                                         : ""
                                     }`}
@@ -302,8 +323,19 @@ export default function UserComponent() {
                       ))}
                     </div>
                   </ModalBody>
-                  <ModalFooter>
-                    
+                  <ModalFooter className="select-none">
+                    <button
+                      className="px-4 py-2 font-medium hover:bg-neutral-700/50 h-10 text-sm transition-all text-[rgb(var(--unknown-primary))] rounded-full border-[rgb(var(--unknown-primary))] border-2"
+                      onClick={cancelAvatarSelection}
+                    >
+                      Annulla
+                    </button>
+                    <button
+                      className="px-4 h-10 text-sm bg-[rgb(var(--unknown-primary))] hover:bg-[rgb(var(--unknown-primary-hover))] transition-all text-white rounded-full"
+                      onClick={confirmAvatarSelection}
+                    >
+                      Conferma
+                    </button>
                   </ModalFooter>
                 </ModalContent>
               </Modal>
@@ -313,19 +345,33 @@ export default function UserComponent() {
 
             {/* Tasti iscrizione e registrazione */}
             <div className="flex items-center gap-2 w-full">
-              <Button
+              {/* -- Da non togliere i bottoni -- */}
+              {/* <Button
                 className="w-full border-[rgb(var(--unknown-primary))] text-[rgb(var(--unknown-primary))] button_login"
                 variant="ghost"
                 radius="full"
               >
                 Login
-              </Button>
-              <Button
+              </Button> */}
+              {/* <Button
                 className="w-full bg-[rgb(var(--unknown-primary))] rounded-full"
                 radius="full"
               >
                 Registrati
-              </Button>
+              </Button> */}
+
+              <button
+                type="button"
+                className="w-full h-10 text-sm px-4 border-[rgb(var(--unknown-primary))] text-[rgb(var(--unknown-primary))] border-2 hover:bg-neutral-700/30 rounded-full transition-all outline-offset-2 outline-transparent"
+              >
+                Login
+              </button>
+              <button
+                type="button"
+                className="w-full h-10 text-sm px-4 bg-[rgb(var(--unknown-primary))] hover:bg-[rgb(var(--unknown-primary-hover))] rounded-full transition-all outline-offset-2 outline-transparent"
+              >
+                Registrati
+              </button>
             </div>
 
             <Divider className="my-2" />
@@ -396,28 +442,19 @@ export default function UserComponent() {
                           </div>
                         </div>
 
-                        {/* censura dei dati */}
+                        {/* Censura dei dati */}
                         <div className="absolute inset-0">
                           <div className="w-full h-full flex flex-col justify-center items-center backdrop-blur">
                             <p className="font-medium mb-2 text-center">
                               Accedi o registrati per vedere i dettagli
                             </p>
                             <div className="flex items-center justify-center gap-2 w-full">
-                              <Button
-                                className="border-[rgb(var(--unknown-primary))] text-[rgb(var(--unknown-primary))] button_login"
-                                variant="ghost"
-                                radius="full"
-                                size="sm"
-                              >
+                              <button className="border-[rgb(var(--unknown-primary))] transition-all border-2 text-[rgb(var(--unknown-primary))] hover:bg-neutral-700/50 px-3 bg-transparent rounded-full h-8 text-xs">
                                 Accedi
-                              </Button>
-                              <Button
-                                size="sm"
-                                className="bg-[rgb(var(--unknown-primary))]"
-                                radius="full"
-                              >
+                              </button>
+                              <button className="px-3 h-8 bg-[rgb(var(--unknown-primary))] hover:bg-[rgb(var(--unknown-primary-hover))] rounded-full text-xs transition-all">
                                 Registrati
-                              </Button>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -473,6 +510,7 @@ export default function UserComponent() {
 
                           {/* Select */}
                           <div className="flex flex-col sm:flex-row items-center w-full gap-4">
+                            {/* Primario */}
                             <div className="w-full">
                               <label
                                 htmlFor="audio_primario"
@@ -484,6 +522,8 @@ export default function UserComponent() {
                                 className="w-full"
                                 id="audio_primario"
                                 defaultSelectedKeys={["it"]}
+                                disallowEmptySelection={true}
+                                selectionMode="single"
                               >
                                 {linguage.map((lang) => (
                                   <SelectItem
@@ -496,6 +536,8 @@ export default function UserComponent() {
                                 ))}
                               </Select>
                             </div>
+
+                            {/* Secondario */}
                             <div className="w-full">
                               <label
                                 htmlFor="audio_secondario"
@@ -507,6 +549,8 @@ export default function UserComponent() {
                                 className="w-full"
                                 id="audio_secondario"
                                 defaultSelectedKeys={["none"]}
+                                disallowEmptySelection={true}
+                                selectionMode="single"
                               >
                                 <SelectItem
                                   key={"none"}
@@ -541,17 +585,20 @@ export default function UserComponent() {
 
                           {/* Select */}
                           <div className="flex flex-col sm:flex-row items-center w-full gap-4">
+                            {/* Primario */}
                             <div className="w-full">
                               <label
-                                htmlFor="audio_primario"
+                                htmlFor="sottotitoli_primario"
                                 className="text-sm"
                               >
                                 Primario
                               </label>
                               <Select
                                 className="w-full"
-                                id="audio_primario"
+                                id="sottotitoli_primario"
                                 defaultSelectedKeys={["it"]}
+                                disallowEmptySelection={true}
+                                selectionMode="single"
                               >
                                 {linguage.map((lang) => (
                                   <SelectItem
@@ -564,9 +611,11 @@ export default function UserComponent() {
                                 ))}
                               </Select>
                             </div>
+
+                            {/* Secondario */}
                             <div className="w-full">
                               <label
-                                htmlFor="audio_secondario"
+                                htmlFor="sottotitoli_secondario"
                                 className="text-sm"
                               >
                                 Secondario
@@ -575,6 +624,8 @@ export default function UserComponent() {
                                 className="w-full"
                                 id="audio_secondario"
                                 defaultSelectedKeys={["none"]}
+                                disallowEmptySelection={true}
+                                selectionMode="single"
                               >
                                 <SelectItem
                                   key={"none"}
@@ -600,7 +651,7 @@ export default function UserComponent() {
                             </div>
                           </div>
 
-                          <div className="mt-4 w-full flex items-center justify-between"></div>
+                          <Divider className="my-4" />
 
                           <div className={account_class_container}>
                             <div className={account_class_content}>
@@ -613,7 +664,7 @@ export default function UserComponent() {
                     </div>
 
                     {/* Cookie */}
-                    <div className="w-full mt-2">
+                    <div className="w-full mt-2 mb-4">
                       <p className="text-xl font-bold">Cookies</p>
                       <Divider className="mt-1 mb-3" />
 
@@ -628,15 +679,13 @@ export default function UserComponent() {
                       </div>
 
                       <div>
-                        <Button
-                          fullWidth
-                          variant="ghost"
-                          startContent={<Trash2 size={20} />}
-                          className="justify-start border-0 bg-danger/20 data-[hover=true]:!bg-danger/50"
-                          onPress={onOpenDelateCookie}
+                        <button
+                          className="inline-flex justify-start items-center w-full gap-2 h-10 text-sm px-4 select-none transition-all bg-danger/20 hover:bg-danger/50 rounded-xl"
+                          onClick={onOpenDelateCookie}
                         >
+                          <Trash2 size={20} />
                           Elimina i dati dei cookie
-                        </Button>
+                        </button>
                         <Modal
                           isOpen={isOpenDelateCookie}
                           onOpenChange={onOpenChangeDelateCookie}
@@ -649,8 +698,16 @@ export default function UserComponent() {
                               <p>Questa azione è irreversibile</p>
                             </ModalBody>
                             <ModalFooter>
-                              <Button variant="ghost" onPress={onOpenChangeDelateCookie}>Annulla</Button>
-                              <Button color="danger">Elimina</Button>
+                              <button
+                                className="px-4 h-10 text-sm border-2 rounded-full border-neutral-700 bg-transparent hover:bg-neutral-700/30 transition-all outline-transparent outline-1 outline-offset-2"
+                                onClick={onOpenChangeDelateCookie}
+                              >
+                                Annulla
+                              </button>
+
+                              <button className="px-4 h-10 text-sm rounded-full bg-danger hover:bg-danger/70 transition-all outline-transparent outline-1 outline-offset-2">
+                                Elimina
+                              </button>
                             </ModalFooter>
                           </ModalContent>
                         </Modal>
