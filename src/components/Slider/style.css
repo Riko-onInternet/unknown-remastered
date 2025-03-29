@@ -1,0 +1,72 @@
+.slider-item-wrapper {
+  transition: all 0.5s ease;
+}
+
+.visibility-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Posizioni degli elementi */
+.position--1,
+.position-1 {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.position--1 {
+  transform: translateX(-50%) scale(0.85);
+}
+
+.position-1 {
+  transform: translateX(50%) scale(0.85);
+}
+
+.position-0 {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  z-index: 2;
+  @apply pointer-events-auto;
+}
+
+/* Posizioni aggiuntive (nascoste ma pronte per l'animazione) */
+.position--2,
+.position-2,
+.position--3,
+.position-3,
+.position--4,
+.position-4,
+.position--5,
+.position-5,
+.position--6,
+.position-6 {
+  transform: translateX(0) scale(0.5);
+  opacity: 0;
+  z-index: 0;
+}
+
+.slider-item {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.slider-item .background-slider {
+  object-fit: cover;
+  pointer-events: none;
+  @apply bg-black;
+}
+
+/* Stili per gli indicatori */
+.slider-indicator.active {
+  @apply bg-[rgb(var(--unknown-primary))] scale-110;
+}
+
+.gradient {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%);
+}

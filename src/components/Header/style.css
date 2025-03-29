@@ -9,7 +9,7 @@ body {
 .header {
   background-color: rgba(var(--unknown-background-secondary), 0.3) !important;
   outline: 1px solid rgba(113, 113, 122, 0.5);
-  @apply fixed top-0 left-0 w-full backdrop-blur;
+  @apply fixed top-0 left-0 w-full backdrop-blur z-50;
 }
 
 .navbar {
