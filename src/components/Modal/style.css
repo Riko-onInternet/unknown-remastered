@@ -1,0 +1,24 @@
+button[aria-label="Close"] {
+  z-index: 1000;
+}
+
+button[role="tab"] {
+  & span {
+    background-color: rgba(var(--unknown-primary), 0.5) !important;
+  }
+}
+
+li {
+  &.data-\[selectable\=true\]\:focus\:text-default-foreground:focus[data-selectable="true"] {
+    --tw-bg-opacity: .3 !important;
+    background-color: rgba(var(--unknown-primary), var(--tw-bg-opacity)) !important;
+    color: inherit;
+  }
+}
+
+.bg {
+  height: 100% !important;
+  & > div {
+    height: 100% !important;
+  }
+}

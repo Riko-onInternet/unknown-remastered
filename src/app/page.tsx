@@ -1,9 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import Header from "@/components/Header";
 import { Slider, SliderItem } from "@/components/Slider";
+import ContentModal from "@/components/Modal";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedContentId, setSelectedContentId] = useState("");
+
+  const handleOpenModal = (id: string) => {
+    setSelectedContentId(id);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Header />
@@ -13,15 +27,15 @@ export default function Home() {
           name="Murder Drones"
           text="Tutta la serie completa!"
           logo="/img/carousel/logos/murder_drones.png"
-          onClick={() => console.log("Murder Drones aperto!")}
-          />
+          onClick={() => handleOpenModal("murderdrones")}
+        />
         <SliderItem
           backgroundImage="/img/carousel/tadc.jpg"
           name="The Amazing Digital Circus"
           text="Il quarto episodio è uscito!"
           logo="/img/carousel/logos/tadc.png"
-          onClick={() => console.log("TADC aperto!")}
-          />
+          onClick={() => handleOpenModal("tadc")}
+        />
         <SliderItem
           backgroundImage="/img/carousel/midnight_gospel.avif"
           name="The Midnight Gospel"
@@ -44,6 +58,12 @@ export default function Home() {
           onClick={() => console.log("She-Ra aperto!")}
         />
       </Slider>
+      
+      <ContentModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+        contentId={selectedContentId} 
+      />
     </>
   );
 }
